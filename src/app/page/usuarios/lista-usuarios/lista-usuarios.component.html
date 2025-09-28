@@ -1,0 +1,68 @@
+<main id="main" class="main">
+  <div class="mb-3">
+    <div class="d-flex justify-content-between align-items-center">
+      <h3 class="card-title">Administrar usuarios</h3>
+
+      <div class="d-flex gap-2">
+        <button
+          class="btn btn-success"
+
+        >
+          <i class="bi bi-people"></i> Crear Usuario
+        </button>
+
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-success dropdown-toggle"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-printer"></i> Imprimir
+          </button>
+          <!-- <ul class="dropdown-menu">
+            <li>
+              <button class="dropdown-item" (click)="descargarPdf()">
+                <i class="bi bi-file-earmark-pdf"></i> Exportar a PDF
+              </button>
+            </li>
+            <li>
+              <button class="dropdown-item" (click)="descargarExcel()">
+                <i class="bi bi-file-earmark-spreadsheet"></i> Exportar a Excel
+              </button>
+            </li>
+          </ul> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Identificación</th>
+              <th scope="col">Nombre completo</th>
+              <!--          <th scope="col">Correo</th> -->
+              <th scope="col">Área</th>
+              <th scope="col">Número de Contacto</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Ampliar información</th>
+            </tr>
+          </thead>
+        </table>
+        <!-- <div
+          *ngIf="usuarios.length === 0"
+          class="alert alert-warning text-center"
+        >
+          No hay usuarios disponibles.
+        </div> -->
+      </div>
+    </div>
+  </div>
+
+ 
+</main>

@@ -1,0 +1,91 @@
+<form [formGroup]="usuarioForm" (ngSubmit)="inicio()">
+  <body>
+    <section class="vh-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <img
+          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+          class="illustration"
+          alt="Phone image"
+        />
+      </div>
+      <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+          <div
+            class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 row login-container form-container"
+          >
+            <div class="featured-image mb-3">
+              <img
+                src="/public/grupoata.png"
+                class="img-fluid"
+                alt="img-logo"
+              />
+            </div>
+            <div class="texto-encabezado mb-4">
+              <h2>Hola</h2>
+              <br />
+              <p>Estamos felices de tenerte de vuelta.</p>
+            </div>
+            <div class="form-outline mb-4">
+              <label class="form-label" for="usuario">Identificación:</label>
+              <input
+                id="usuario"
+                type="text"
+                formControlName="usuario"
+                class="form-control form-control-lg"
+                autocomplete="username"
+              />
+            </div>
+
+            <div class="form-outline mb-4 position-relative">
+              <label class="form-label" for="contrasena">Contraseña:</label>
+              <input
+                id="contrasena"
+                [type]="mostrarContrasena ? 'text' : 'password'"
+                formControlName="contrasena"
+                class="form-control form-control-lg"
+                autocomplete="current-password"
+                title="Introduce tu contraseña"
+              />
+              <i
+                class="fa"
+                [ngClass]="mostrarContrasena ? 'fa-eye-slash' : 'fa-eye'"
+                (click)="alternarMostrarContrasena()"
+                style="
+                  position: absolute;
+                  right: 15px;
+                  top: 70%;
+                  transform: translateY(-50%);
+                  cursor: pointer;
+                "
+                title="Mostrar/Ocultar contraseña"
+              ></i>
+            </div>
+
+            <div class="d-flex justify-content-around align-items-center mb-4">
+              <a
+                href="javascript:void(0)"
+               
+                >¿Olvidaste tu contraseña?</a
+              >
+            </div>
+            <div class="input-group mb-3">
+              <button
+                type="submit"
+                [disabled]="!usuarioForm.valid"
+                class="btn btn-lg btn-light w-100 fs-6"
+              >
+                <img
+                  src="/public/login.png"
+                  alt="Icono de inicio de sesión"
+                  class="me-2"
+                  style="width: 20px"
+                />
+                <small>Iniciar sesión</small>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</form>
