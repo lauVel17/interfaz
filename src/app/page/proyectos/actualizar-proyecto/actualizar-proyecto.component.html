@@ -1,1 +1,25 @@
-<p>actualizar-proyecto works!</p>
+<div class="container mt-4">
+  <h4>Actualizar Proyecto</h4>
+
+  <form [formGroup]="proyectoForm" (ngSubmit)="guardarCambios()">
+    <label>Nombre:</label>
+    <input type="text" formControlName="nombre" class="form-control" />
+
+    <label>Descripción:</label>
+    <textarea formControlName="descripcion" class="form-control"></textarea>
+
+    <label>Ciudad:</label>
+    <select formControlName="ciudad" class="form-select">
+      <option value="">Seleccione una ciudad</option>
+      <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
+    </select>
+
+    <label>Fecha de inicio:</label>
+    <input type="date" formControlName="fechaInicio" class="form-control" />
+
+    <label>Fecha de fin:</label>
+    <input type="date" formControlName="fechaFin" class="form-control" />
+
+    <button type="submit" class="btn btn-primary mt-3">Guardar cambios</button>
+  </form>
+</div>
