@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { forkJoin } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { CodigoRService } from '../../../services/codigoR.service';
 
 @Component({
   selector: 'app-principal',
@@ -14,7 +15,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    private codigoR: CodigoRService,
+  ) {}
 
   ngOnInit(): void {}
 
@@ -25,5 +28,8 @@ export class AdminComponent implements OnInit {
     if (body) {
       body.classList.toggle('toggle-sidebar');
     }
+  }
+    crearUsuario() {
+    this.codigoR.abrirCrearUsuario();
   }
 }

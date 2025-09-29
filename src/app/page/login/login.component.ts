@@ -10,6 +10,11 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { inicioS, tokenCrear } from '../../../models/usuarios';
+import { ErrorComponent } from '../../mensajes/error/error.component';
+import { SesionService } from '../../../services/sesion.service';
+import { UsuarioService } from '../../../services/usuario.service';
+import { UsTokenService } from '../../../services/usToken.service';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +29,11 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private sesion: SesionService,
     private router: Router,
-    public dialog: MatDialog,
+    private usuarioService: UsuarioService,
+    private usTokenService: UsTokenService,
+    public dialog: MatDialog
   ) {
     this.usuarioForm = this.formBuilder.group({
       usuario: ['', Validators.required],
@@ -39,65 +47,57 @@ export class LoginComponent implements OnInit {
     this.mostrarContrasena = !this.mostrarContrasena;
   }
   inicio(): void {
-   /*  if (this.usuarioForm.valid) {
-      const { usuario, contrasena } = this.usuarioForm.value;
+    if (!this.usuarioForm.valid) return;
 
-      this.sesion.postPeticiones(usuario, contrasena).subscribe(
-        (response: inicioS) => {
-          if (response.token) {
-            if (response.estado === 'Activo') {
-              this.sesion.setToken(response.token);
+    const { usuario, contrasena } = this.usuarioForm.value;
 
-              localStorage.setItem('estadoUsuario', response.estado);
-              this.notificacion
-                .registrarTokenNotificacion()
-                .then(() => {})
-                .catch((error) => {
-                  console.error('Error en registro de notificación:', error);
-                  this.router.navigate(['/principal/menuPrincipal']);
-                });
-
-              this.registrarToken(response.idUsuario, response.token);
-
-              this.inactividadUsuario.iniciarDeteccion();
-              this.router.navigate(['/principal/menuPrincipal']);
-            } else {
-              this.dialog.open(ErrorComponent, {
-                width: '250px',
-                data: {
-                  message:
-                    'Su cuenta está inactiva. Contacte con un administrador.',
-                },
-              });
-            }
-          }
-        },
-        (error) => {
-          const mensajeError =
-            error.error?.msg ||
-            'No se pudo completar la operación. Intenta nuevamente más tarde o contacte al administrador.';
-
-          this.dialog.open(ErrorComponent, {
-            width: '300px',
-            data: { message: mensajeError },
-          });
+    this.sesion.postPeticiones(usuario, contrasena).subscribe({
+      next: (response: inicioS) => {
+        if (!response.token) {
+          this.mostrarError('No se recibió un token válido.');
+          return;
         }
-      );
-    } */
+
+        if (response.estado !== 'Activo') {
+          this.mostrarError(
+            'Su cuenta está inactiva. Contacte con un administrador.'
+          );
+          return;
+        }
+
+        this.sesion.setToken(response.token);
+        localStorage.setItem('estadoUsuario', response.estado);
+       this.registrarToken(response.nodocumento, response.token); 
+        this.router.navigate(['/admin']);
+      },
+      error: (error) => {
+        const mensajeError =
+          error.error?.msg ||
+          'No se pudo completar la operación. Intenta nuevamente más tarde o contacte al administrador.';
+        this.mostrarError(mensajeError);
+      },
+    });
+  }
+
+  private mostrarError(mensaje: string): void {
+    this.dialog.open(ErrorComponent, {
+      width: '300px',
+      data: { message: mensaje },
+    });
   }
 
   registrarToken(usuarioId: number, token: string): void {
- /*    this.usTokenService.postTokens(usuarioId, token).subscribe(
+    this.usTokenService.postTokens(usuarioId, token).subscribe(
       (response: tokenCrear) => {},
       (error: HttpErrorResponse) => {
         console.error('Error al registrar el token:', error);
       }
-    ); */
+    );
   }
 
-  openRecuperarContrasenaDialog() {
-  /*   const dialogRef = this.dialog.open(RecConDialogComponent);
+  /*   openRecuperarContrasenaDialog() {
+    const dialogRef = this.dialog.open(RecConDialogComponent);
 
-    dialogRef.afterClosed().subscribe((result) => {}); */
-  }
+    dialogRef.afterClosed().subscribe((result) => {});
+  } */
 }
