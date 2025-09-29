@@ -6,27 +6,28 @@
 html, body {
   height: 100%;
   overflow-y: auto;
+  background-color: #071e33;
 }
 
 a {
   text-decoration: none;
-  color: var(--color);
+  color: #e3d7bf;
   transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 a:hover {
-  color: var(--primary-color);
+  color: #e3d7bf;
   transform: scale(1.1);
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 300;
-  color: #3f4246;
+  color: #e3d7bf;
   text-align: center;
   margin-top: 20px;
   font-family: 'Raleway', sans-serif;
-  background: linear-gradient(to right, #6c757d, #343a40);
+  background: linear-gradient(to right, #c7b69f, #ab9680);
   -webkit-background-clip: text;
   background-clip: text;
   display: inline-block;
@@ -35,13 +36,14 @@ h2 {
 }
 
 .container {
-  display: flex;
+  display: end;
+  display: center;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   position: relative;
   overflow: auto;
 }
+  
 
 .login-container {
   position: relative;
@@ -49,8 +51,6 @@ h2 {
   height: 37rem;
   z-index: 2;
   animation: slideInUp 1s ease-in-out;
-  margin-left: 100%;
-
   max-height: 90vh;
 }
 
@@ -97,7 +97,7 @@ h2 {
   }
 
   .form-container {
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(214, 214, 214, 0.2);
     box-shadow: 0 0 50px 1px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     backdrop-filter: blur(30px);
@@ -161,16 +161,16 @@ h2 {
 }
 
 button {
-  background-color: #84b6f4;
+  background-color: #907761;
 }
 
 p {
   font-size: 1rem;
-  color: #2c3136;
+  color: #fff9e1;
   text-align: center;
   margin-top: 20px;
   font-family: 'Raleway', sans-serif;
-  background: linear-gradient(to right, #6c757d, #343a40);
+  background: linear-gradient(to right, #0662b3, #010c16);
   -webkit-background-clip: text;
   background-clip: text;
   display: inline-block;
@@ -181,7 +181,7 @@ p {
 label {
   font-size: 0.8rem;
   font-weight: 300;
-  color: #2c3136;
+  color: #e3d7bf;
   text-align: center;
   margin-top: 20px;
   font-family: 'Raleway', sans-serif;
@@ -191,4 +191,8 @@ label {
   display: inline-block;
   transition: all 0.3s ease;
   margin-left: 2%;
+}
+.img-fluid{
+ width: 40%;
+ height: auto;
 }
