@@ -1,0 +1,418 @@
+<div class="container" style="padding: 30px; justify-content: center">
+  <div class="card">
+    <div class="card-body">
+      <div class="encabezado-atras">
+        <button class="close-button" (click)="cerrarDialogo()">
+          <i class="bi bi-box-arrow-in-left"></i>
+        </button>
+
+        <h6 class="card-title">Crear proyecto</h6>
+      </div>
+<<<<<<< HEAD
+
+      <form
+        [formGroup]="proyectoForm"
+        (ngSubmit)="crear()"
+        class="row g-3 needs-validation"
+        novalidate
+      >
+        <!-- Nombre del proyecto -->
+        <div class="col-md-6">
+=======
+      <forms
+        class="row g-3 needs-validation"
+        [formGroup]="crearPryectoForm"
+        (ngSubmit)="crear()"
+        novalidate
+      >
+        <div class="col-md-4">
+>>>>>>> 9f08e2b108630426ac4dfe14d9ced63e58988862
+          <div class="form-floating">
+            <input
+              type="text"
+              class="form-control"
+<<<<<<< HEAD
+              id="nombre"
+              placeholder="Nombre del proyecto"
+              formControlName="nombre"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('nombre')?.invalid &&
+                  proyectoForm.get('nombre')?.touched,
+                'is-valid': proyectoForm.get('nombre')?.valid
+              }"
+            />
+            <label for="nombre">Nombre del proyecto</label>
+            <div
+              *ngIf="
+                proyectoForm.get('nombre')?.invalid &&
+                proyectoForm.get('nombre')?.touched
+              "
+              class="invalid-feedback"
+            >
+              El nombre es obligatorio y debe tener menos de 100 caracteres.
+=======
+              id="nodocumento"
+              placeholder="No documento"
+              formControlName="nodocumento"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  crearUsuarioForm.get('nodocumento')?.invalid &&
+                  crearUsuarioForm.get('nodocumento')?.touched
+              }"
+            />
+            <label for="nodocumento">No. Documento</label>
+            <div
+              *ngIf="
+                crearUsuarioForm.get('nodocumento')?.invalid &&
+                crearUsuarioForm.get('nodocumento')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa un No. de documento válido
+>>>>>>> 9f08e2b108630426ac4dfe14d9ced63e58988862
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-floating">
+<<<<<<< HEAD
+            <textarea
+              class="form-control"
+              id="descripcion"
+              placeholder="Descripción del proyecto"
+              formControlName="descripcion"
+              style="height: 100px"
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('descripcion')?.invalid &&
+                  proyectoForm.get('descripcion')?.touched,
+                'is-valid': proyectoForm.get('descripcion')?.valid
+              }"
+            ></textarea>
+            <label for="descripcion">Descripción</label>
+            <div
+              *ngIf="
+                proyectoForm.get('descripcion')?.invalid &&
+                proyectoForm.get('descripcion')?.touched
+              "
+              class="invalid-feedback"
+            >
+              La descripción es obligatoria.
+=======
+            <input
+              type="text"
+              formControlName="nombreapellido"
+              class="form-control"
+              id="nombreapellido"
+              placeholder="nombreapellido"
+              [ngClass]="{
+                'is-invalid':
+                  crearUsuarioForm.get('nombreapellido')?.invalid &&
+                  crearUsuarioForm.get('nombreapellido')?.touched,
+                'is-valid': crearUsuarioForm.get('nombreapellido')?.valid
+              }"
+              required
+            />
+            <label for="nombreapellido">Nombre completo</label>
+            <div
+              *ngIf="
+                crearUsuarioForm.get('nombreapellido')?.invalid &&
+                crearUsuarioForm.get('nombreapellido')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa un  y apellido válido.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="email"
+              formControlName="correo"
+              class="form-control"
+              id="correo"
+              placeholder="Correo electrónico"
+              [ngClass]="{
+                'is-invalid':
+                  crearUsuarioForm.get('correo')?.invalid &&
+                  crearUsuarioForm.get('correo')?.touched,
+                'is-valid': crearUsuarioForm.get('correo')?.valid
+              }"
+              required
+            />
+            <label for="correo">Correo electrónico</label>
+            <div
+              *ngIf="
+                crearUsuarioForm.get('correo')?.invalid &&
+                crearUsuarioForm.get('correo')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa un correo electrónico válido.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="text"
+              formControlName="telefono"
+              class="form-control"
+              id="telefono"
+              placeholder="Teléfono"
+              [ngClass]="{
+                'is-invalid':
+                  crearUsuarioForm.get('telefono')?.invalid &&
+                  crearUsuarioForm.get('telefono')?.touched,
+                'is-valid': crearUsuarioForm.get('telefono')?.valid
+              }"
+              required
+            />
+            <label for="telefono">Teléfono</label>
+            <div
+              *ngIf="
+                crearUsuarioForm.get('telefono')?.invalid &&
+                crearUsuarioForm.get('telefono')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa un número de teléfono válido.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="datetime-local"
+              formControlName="fechaingreso"
+              class="form-control"
+              id="fechaingreso"
+              placeholder="Fecha de Nacimiento"
+              [ngClass]="{
+                'is-invalid':
+                  crearUsuarioForm.get('fechaingreso')?.invalid &&
+                  crearUsuarioForm.get('fechaingreso')?.touched,
+                'is-valid': crearUsuarioForm.get('fechaingreso')?.valid
+              }"
+              required
+            />
+            <label for="fechaingreso">Fecha de Ingreso</label>
+            <div
+              *ngIf="
+                crearUsuarioForm.get('fechaingreso')?.invalid &&
+                crearUsuarioForm.get('fechaingreso')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor,seleccione una fecha de ingreso.
+>>>>>>> 9f08e2b108630426ac4dfe14d9ced63e58988862
+            </div>
+          </div>
+        </div>
+
+<<<<<<< HEAD
+     <div class="col-md-4">
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              id="departamento"
+              formControlName="departamento"
+              aria-label="Departamento"
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('departamento')?.invalid &&
+                  proyectoForm.get('departamento')?.touched,
+                'is-valid': proyectoForm.get('departamento')?.valid
+              }"
+              required
+            >
+              <option value="" disabled selected>Seleccionar</option>
+              <option
+                *ngFor="let dept of departamentos"
+                [value]="dept.iddepartamento"
+              >
+                {{ dept.nombre }}
+              </option>
+            </select>
+            <label for="departamento">Departamento</label>
+            <div
+              *ngIf="
+                proyectoForm.get('departamento')?.invalid &&
+                proyectoForm.get('departamento')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor, selecciona un departamento.
+            </div>
+          </div>
+        </div>
+
+=======
+>>>>>>> 9f08e2b108630426ac4dfe14d9ced63e58988862
+        <div class="col-md-4">
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+<<<<<<< HEAD
+              formControlName="ciudad"
+              id="ciudad"
+              aria-label="Ciudad"
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('ciudad')?.invalid &&
+                  proyectoForm.get('ciudad')?.touched,
+                'is-valid': proyectoForm.get('ciudad')?.valid
+=======
+              id="departamento"
+              formControlName="departamento"
+              aria-label="Departamento"
+              [ngClass]="{
+                'is-invalid':
+                  crearUsuarioForm.get('departamento')?.invalid &&
+                  crearUsuarioForm.get('departamento')?.touched,
+                'is-valid': crearUsuarioForm.get('departamento')?.valid
+              }"
+              required
+            >
+              <option value="" disabled selected>Seleccionar</option>
+              <option
+                *ngFor="let dept of departamentos"
+                [value]="dept.iddepartamento"
+              >
+                {{ dept.nombre }}
+              </option>
+            </select>
+            <label for="departamento">Departamento</label>
+            <div
+              *ngIf="
+                crearUsuarioForm.get('departamento')?.invalid &&
+                crearUsuarioForm.get('departamento')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor, selecciona un departamento.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              formControlName="ciudad"
+              id="ciudad"
+              aria-label="Ciudad"
+              [ngClass]="{
+                'is-invalid':
+                  crearUsuarioForm.get('ciudad')?.invalid &&
+                  crearUsuarioForm.get('ciudad')?.touched,
+                'is-valid': crearUsuarioForm.get('ciudad')?.valid
+>>>>>>> 9f08e2b108630426ac4dfe14d9ced63e58988862
+              }"
+              required
+            >
+              <option value="" disabled selected>Seleccionar</option>
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.idciudad">
+                {{ ciudad.nombre }}
+              </option>
+            </select>
+            <label for="ciudad">Ciudad</label>
+            <div
+              *ngIf="
+<<<<<<< HEAD
+                proyectoForm.get('ciudad')?.invalid &&
+                proyectoForm.get('ciudad')?.touched
+=======
+                crearUsuarioForm.get('ciudad')?.invalid &&
+                crearUsuarioForm.get('ciudad')?.touched
+>>>>>>> 9f08e2b108630426ac4dfe14d9ced63e58988862
+              "
+              class="invalid-feedback"
+            >
+              Por favor, selecciona una ciudad.
+            </div>
+          </div>
+        </div>
+
+<<<<<<< HEAD
+        <!-- Fecha de inicio -->
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="date"
+              class="form-control"
+              id="fechaInicio"
+              placeholder="Fecha de inicio"
+              formControlName="fechaInicio"
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('fechaInicio')?.invalid &&
+                  proyectoForm.get('fechaInicio')?.touched,
+                'is-valid': proyectoForm.get('fechaInicio')?.valid
+              }"
+              required
+            />
+            <label for="fechaInicio">Fecha de inicio</label>
+            <div
+              *ngIf="
+                proyectoForm.get('fechaInicio')?.invalid &&
+                proyectoForm.get('fechaInicio')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor, selecciona una fecha de inicio válida.
+            </div>
+          </div>
+        </div>
+
+        <!-- Fecha de fin -->
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="date"
+              class="form-control"
+              id="fechaFin"
+              placeholder="Fecha de fin"
+              formControlName="fechaFin"
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('fechaFin')?.invalid &&
+                  proyectoForm.get('fechaFin')?.touched,
+                'is-valid': proyectoForm.get('fechaFin')?.valid
+              }"
+              required
+            />
+            <label for="fechaFin">Fecha de fin</label>
+            <div
+              *ngIf="
+                proyectoForm.get('fechaFin')?.invalid &&
+                proyectoForm.get('fechaFin')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor, selecciona una fecha de fin válida.
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-kanban-fill"></i> Crear Proyecto
+=======
+        <div class="text-center">
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-people"></i> Crear Usuario
+>>>>>>> 9f08e2b108630426ac4dfe14d9ced63e58988862
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
