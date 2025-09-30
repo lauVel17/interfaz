@@ -1,0 +1,243 @@
+<div class="container" style="padding: 30px; justify-content: center">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-title">Actualizar usuario</h6>
+      <form class="row g-3" [formGroup]="usuarioForm">
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="text"
+              formControlName="nodocumento"
+              class="form-control"
+              id="nodocumentoU"
+              placeholder="nodocumento"
+              required
+             [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('nodocumento')?.dirty &&
+                  usuarioForm.get('nodocumento')?.invalid,
+                'is-valid':
+                  usuarioForm.get('nodocumento')?.dirty &&
+                  usuarioForm.get('nodocumento')?.valid
+              }"
+            />
+            <label for="nodocumento">No Documento</label>
+            <div
+              *ngIf="
+                usuarioForm.get('nodocumento')?.dirty &&
+                usuarioForm.get('nodocumento')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa una No. de documento válida.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="text"
+              formControlName="nombreapellido"
+              class="form-control"
+              id="nombreapellido"
+              placeholder="Nombre completo"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('nombreapellido')?.dirty &&
+                  usuarioForm.get('nombreapellido')?.invalid,
+                'is-valid':
+                  usuarioForm.get('nombreapellido')?.dirty &&
+                  usuarioForm.get('nombreapellido')?.valid
+              }"
+            />
+            <label for="nombre">Nombre completo</label>
+            <div
+              *ngIf="
+                usuarioForm.get('nombreapellido')?.dirty &&
+                usuarioForm.get('nombreapellido')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa un nombre válido.
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="email"
+              formControlName="correo"
+              class="form-control"
+              id="correoU"
+              placeholder="Correo electrónico"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('correo')?.dirty &&
+                  usuarioForm.get('correo')?.invalid,
+                'is-valid':
+                  usuarioForm.get('correo')?.dirty &&
+                  usuarioForm.get('correo')?.valid
+              }"
+            />
+            <label for="correo">Correo electrónico</label>
+            <div
+              *ngIf="
+                usuarioForm.get('correo')?.dirty &&
+                usuarioForm.get('correo')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa un correo electrónico válido.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="text"
+              formControlName="telefono"
+              class="form-control"
+              id="telefonoU"
+              placeholder="Teléfono"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('telefono')?.dirty &&
+                  usuarioForm.get('telefono')?.invalid,
+                'is-valid':
+                  usuarioForm.get('telefono')?.dirty &&
+                  usuarioForm.get('telefono')?.valid
+              }"
+            />
+            <label for="telefono">Teléfono</label>
+            <div
+              *ngIf="
+                usuarioForm.get('telefono')?.dirty &&
+                usuarioForm.get('telefono')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa un número de teléfono válido.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+               type="datetime-local"
+              formControlName="fechaingreso"
+              class="form-control"
+              id="fechaingresoU"
+              placeholder="Fecha de Ingreso"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('fechaingreso')?.dirty &&
+                  usuarioForm.get('fechaingreso')?.invalid,
+                'is-valid':
+                  usuarioForm.get('fechaingreso')?.dirty &&
+                  usuarioForm.get('fechaingreso')?.valid
+              }"
+            />
+            <label for="fechaingreso">Fecha de Ingreso</label>
+            <div
+              *ngIf="
+                usuarioForm.get('fechaingreso')?.dirty &&
+                usuarioForm.get('fechaingreso')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa una fecha de ingreso.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              id="departamentoU"
+              formControlName="departamento"
+              aria-label="Departamento"
+              (change)="onDepartamentoChange($event)"
+              [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('departamento')?.dirty &&
+                  usuarioForm.get('departamento')?.invalid,
+                'is-valid':
+                  usuarioForm.get('departamento')?.dirty &&
+                  usuarioForm.get('departamento')?.valid
+              }"
+            >
+              <option value="" disabled selected>Seleccionar</option>
+              <option
+                *ngFor="let dept of departamentos"
+                [value]="dept.iddepartamento"
+              >
+                {{ dept.nombre }}
+              </option>
+            </select>
+            <label for="departamento">Departamento</label>
+            <div
+              *ngIf="
+                usuarioForm.get('departamento')?.dirty &&
+                usuarioForm.get('departamento')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, selecciona un departamento.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              formControlName="ciudad"
+              id="ciudadU"
+              aria-label="Ciudad"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  usuarioForm.get('ciudad')?.dirty &&
+                  usuarioForm.get('ciudad')?.invalid,
+                'is-valid':
+                  usuarioForm.get('ciudad')?.dirty &&
+                  usuarioForm.get('ciudad')?.valid
+              }"
+            >
+              <option value="" disabled selected>Seleccionar</option>
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.idciudad">
+                {{ ciudad.nombre }}
+              </option>
+            </select>
+            <label for="ciudad">Ciudad</label>
+            <div
+              *ngIf="
+                usuarioForm.get('ciudad')?.dirty &&
+                usuarioForm.get('ciudad')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, selecciona una ciudad.
+            </div>
+          </div>
+        </div>
+
+
+        <div class="text-center">
+          <button
+            type="button"
+            class="btn btn-info"
+            [disabled]="usuarioForm.pristine"
+            (click)="actualizarUsuario(nodocumento)"
+          >
+            <i class="bi bi-people"></i> Actualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

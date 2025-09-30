@@ -1,0 +1,67 @@
+<main id="main" class="main">
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <h3 class="card-title">Administrar proyectos</h3>
+
+    <div class="d-flex gap-2">
+      <button class="btn btn-success" (click)="crearProyecto()">
+        <i class="bi bi-people"></i> Crear Proyecto
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div *ngIf="proyectos.length === 0" class="col-12">
+      <div class="alert alert-warning text-center">
+        No hay proyectos disponibles.
+      </div>
+    </div>
+
+    <!-- Tarjetas -->
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-3"
+      *ngFor="let proyecto of paginatedProyectos()"
+    >
+      <div class="card h-100 shadow-sm proyecto-card">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title text-truncate" title="{{ proyecto.nombre }}">
+            {{ proyecto.nombre || "No disponible" }}
+          </h5>
+
+          <p
+            class="card-text descripcion mb-2"
+            title="{{ proyecto.descripcion }}"
+          >
+            {{ proyecto.descripcion || "No disponible" }}
+          </p>
+
+          <ul class="list-unstyled mb-3 small mt-auto">
+            <li>
+              <strong>Fecha inicio:</strong>
+              {{ proyecto.fechainicio || "No disponible" }}
+            </li>
+            <li>
+              <strong>Fecha fin:</strong>
+              {{ proyecto.fechafin || "No disponible" }}
+            </li>
+          </ul>
+
+          <div class="d-flex gap-2 align-items-center">
+            <button
+              class="btn btn-info btn-sm flex-fill"
+              (click)="ampliarInfo(proyecto.idproyecto)"
+            >
+              <i class="bi bi-eye-fill"></i> Ver más
+            </button>
+
+            <button
+              class="btn btn-outline-success btn-sm flex-fill"
+              (click)="postularme(proyecto.idproyecto)"
+            >
+              <i class="bi bi-send-fill"></i> Postularme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

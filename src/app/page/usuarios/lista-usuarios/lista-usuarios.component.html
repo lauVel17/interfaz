@@ -1,0 +1,64 @@
+<main id="main" class="main">
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <h3 class="card-title">Administrar usuarios</h3>
+    <div>
+      <button class="btn btn-success" (click)="crearUsuario()">
+        <i class="bi bi-people"></i> Crear Usuario
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-sm">
+          <thead class="thead-dark">
+            <tr>
+              <th>Identificación</th>
+              <th>Nombre completo</th>
+              <th>Número de Contacto</th>
+              <th>Estado</th>
+              <th>Ampliar información</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let usuario of paginatedUsuarios()"
+              [ngClass]="{ sombreado: usuario.estado === 'Activo' }"
+            >
+              <td>{{ usuario.nodocumento || 'No disponible' }}</td>
+              <td>{{ usuario.nombreapellido || 'No disponible' }}</td>
+              <td>{{ usuario.telefono || 'No disponible' }}</td>
+              <td class="text-center">
+                <div class="form-check form-switch">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    [checked]="usuario.estado === 'Activo'"
+                    (change)="cambiarEstado(usuario)"
+                  />
+                  <label class="form-check-label">
+                    {{ usuario.estado || 'No disponible' }}
+                  </label>
+                </div>
+              </td>
+              <td class="text-center">
+                <button
+                  class="btn btn-info btn-sm"
+                  (click)="ampliarInfo(usuario.nodocumento)"
+                >
+                  <i class="bi bi-eye-fill"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Sin usuarios -->
+        <div *ngIf="usuarios.length === 0" class="alert alert-warning text-center">
+          No hay usuarios disponibles.
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
