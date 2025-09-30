@@ -1,25 +1,216 @@
-<div class="container mt-4">
-  <h4>Actualizar Proyecto</h4>
+<div class="container" style="padding: 30px; justify-content: center">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-title">Actualizar usuario</h6>
+      <form class="row g-3" [formGroup]="proyectoForm">
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="text"
+              formControlName="nombre"
+              class="form-control"
+              id="nombre"
+              placeholder="Nombre"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('nombre')?.dirty &&
+                  proyectoForm.get('nombre')?.invalid,
+                'is-valid':
+                  proyectoForm.get('nombre')?.dirty &&
+                  proyectoForm.get('nombre')?.valid
+              }"
+            />
+            <label for="nombre">Nombre</label>
+            <div
+              *ngIf="
+                proyectoForm.get('nombre')?.dirty &&
+                proyectoForm.get('nombre')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa un nombre válido (máximo 100 caracteres).
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="text"
+              formControlName="descripcion"
+              class="form-control"
+              id="descripcion"
+              placeholder="Descripción"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('descripcion')?.dirty &&
+                  proyectoForm.get('descripcion')?.invalid,
+                'is-valid':
+                  proyectoForm.get('descripcion')?.dirty &&
+                  proyectoForm.get('descripcion')?.valid
+              }"
+            />
+            <label for="descripcion">Descripción</label>
+            <div
+              *ngIf="
+                proyectoForm.get('descripcion')?.dirty &&
+                proyectoForm.get('descripcion')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa una descripción válida.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              id="departamentoU"
+              formControlName="departamento"
+              aria-label="Departamento"
+              (change)="onDepartamentoChange($event)"
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('departamento')?.dirty &&
+                  proyectoForm.get('departamento')?.invalid,
+                'is-valid':
+                  proyectoForm.get('departamento')?.dirty &&
+                  proyectoForm.get('departamento')?.valid
+              }"
+            >
+              <option value="" disabled selected>Seleccionar</option>
+              <option
+                *ngFor="let dept of departamentos"
+                [value]="dept.iddepartamento"
+              >
+                {{ dept.nombre }}
+              </option>
+            </select>
+            <label for="departamentoU">Departamento</label>
+            <div
+              *ngIf="
+                proyectoForm.get('departamento')?.dirty &&
+                proyectoForm.get('departamento')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, selecciona un departamento.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-floating mb-3">
+            <select
+              class="form-select"
+              formControlName="ciudad"
+              id="ciudadU"
+              aria-label="Ciudad"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('ciudad')?.dirty &&
+                  proyectoForm.get('ciudad')?.invalid,
+                'is-valid':
+                  proyectoForm.get('ciudad')?.dirty &&
+                  proyectoForm.get('ciudad')?.valid
+              }"
+            >
+              <option value="" disabled selected>Seleccionar</option>
+              <option *ngFor="let ciudad of ciudades" [value]="ciudad.idciudad">
+                {{ ciudad.nombre }}
+              </option>
+            </select>
+            <label for="ciudadU">Ciudad</label>
+            <div
+              *ngIf="
+                proyectoForm.get('ciudad')?.dirty &&
+                proyectoForm.get('ciudad')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, selecciona una ciudad.
+            </div>
+          </div>
+        </div>
 
-  <form [formGroup]="proyectoForm" (ngSubmit)="guardarCambios()">
-    <label>Nombre:</label>
-    <input type="text" formControlName="nombre" class="form-control" />
+        <!-- Fecha de Inicio -->
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="date"
+              formControlName="fechainicio"
+              class="form-control"
+              id="fechaInicio"
+              [min]="minFechaHoy"
+              placeholder="Fecha de Inicio"
+              required
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('fechainicio')?.dirty &&
+                  proyectoForm.get('fechainicio')?.invalid,
+                'is-valid':
+                  proyectoForm.get('fechainicio')?.dirty &&
+                  proyectoForm.get('fechainicio')?.valid
+              }"
+            />
+            <label for="fechaInicio">Fecha de Inicio</label>
+            <div
+              *ngIf="
+                proyectoForm.get('fechainicio')?.dirty &&
+                proyectoForm.get('fechainicio')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa una fecha de inicio válida.
+            </div>
+          </div>
+        </div>
 
-    <label>Descripción:</label>
-    <textarea formControlName="descripcion" class="form-control"></textarea>
-
-    <label>Ciudad:</label>
-    <select formControlName="ciudad" class="form-select">
-      <option value="">Seleccione una ciudad</option>
-      <option *ngFor="let ciudad of ciudades" [value]="ciudad.id">{{ ciudad.nombre }}</option>
-    </select>
-
-    <label>Fecha de inicio:</label>
-    <input type="date" formControlName="fechaInicio" class="form-control" />
-
-    <label>Fecha de fin:</label>
-    <input type="date" formControlName="fechaFin" class="form-control" />
-
-    <button type="submit" class="btn btn-primary mt-3">Guardar cambios</button>
-  </form>
+        <!-- Fecha de Fin -->
+        <div class="col-md-4">
+          <div class="form-floating">
+            <input
+              type="date"
+              formControlName="fechafin"
+              class="form-control"
+              id="fechaFin"
+              placeholder="Fecha de Fin"
+              required
+              [min]="minFechaFin"
+              [ngClass]="{
+                'is-invalid':
+                  proyectoForm.get('fechafin')?.dirty &&
+                  proyectoForm.get('fechafin')?.invalid,
+                'is-valid':
+                  proyectoForm.get('fechafin')?.dirty &&
+                  proyectoForm.get('fechafin')?.valid
+              }"
+            />
+            <label for="fechaFin">Fecha de Fin</label>
+            <div
+              *ngIf="
+                proyectoForm.get('fechaFin')?.dirty &&
+                proyectoForm.get('fechafin')?.invalid
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingresa una fecha de fin válida.
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button
+            type="button"
+            class="btn btn-info"
+            [disabled]="proyectoForm.pristine"
+            (click)="actualizarProyecto(idproyecto)"
+          >
+            <i class="bi bi-kanban-fill"></i> Actualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

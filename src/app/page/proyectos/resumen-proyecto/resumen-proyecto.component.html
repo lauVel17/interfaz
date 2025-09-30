@@ -1,63 +1,80 @@
-<div class="container" style="padding: 30px;">
-  <div class="card">
-    <div class="card-body">
-      <div class="encabezado-atras mb-3">
-        <button class="close-button" (click)="cerrarResumen()">
-          <i class="bi bi-box-arrow-in-left"></i>
-        </button>
-        <h6 class="card-title">Resumen del Proyecto</h6>
+<main id="main" class="main">
+  <div class="container">
+    <h6 class="card-title">Administrar Proyecto</h6>
+    <div class="card shadow p-3 mb-5 bg-body rounded mt-4">
+      <div *ngIf="proyecto" class="row g-0">
+        <div class="col-md-1">
+           <h2 class="text-center">
+            <div class="user-icon">
+              <img src="/public/tareas2.png" alt="Usuarios" />
+            </div>
+          </h2>
+        </div>
+
+        <div class="col-md-5">
+          <div class="card-body">
+            <h5 class="name">
+              <span *ngIf="proyecto.nombre; else noDisponible">
+                {{ proyecto.nombre }}
+              </span>
+              <ng-template #noDisponible>No disponible</ng-template>
+            </h5>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card-body">
+            <h5 class="card-text">
+              <strong><small>Descripción: </small></strong>
+              {{ proyecto.descripcion || "No disponible" }}
+            </h5>
+            <h5 class="card-text">
+              <strong><small>Fecha Inicio: </small></strong>
+              {{ proyecto.fechainicio || "No disponible" }}
+            </h5>
+            <h5 class="card-text">
+              <strong><small>Fecha Fin: </small></strong>
+              {{ proyecto.fechafin || "No disponible" }}
+            </h5>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card-body">
+            <h5 class="card-text">
+              <strong><small>Ciudad: </small></strong>
+              {{ getCiudadName(proyecto.ciudadid) || "No disponible" }}
+            </h5>
+          </div>
+        </div>
       </div>
 
-      <div class="row g-3">
-        <!-- Nombre -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label><strong>Nombre del proyecto:</strong></label>
-            <p>{{ proyecto.nombre || 'No disponible' }}</p>
-          </div>
-        </div>
+      <ul class="nav nav-tabs d-flex" role="tablist">
+        <li class="nav-item flex-fill" role="presentation">
+          <button
+            class="nav-link w-100"
+            [class.active]="tabActivo === 'resumen'"
+            (click)="tabActivo = 'resumen'"
+          >
+            Resumen
+          </button>
+        </li>
+        <li class="nav-item flex-fill" role="presentation">
+          <button
+            class="nav-link w-100"
+            [class.active]="tabActivo === 'contrasena'"
+            (click)="tabActivo = 'contrasena'"
+          >
+            Participantes
+          </button>
+        </li>
+      </ul>
 
-        <!-- Descripción -->
-        <div class="col-md-6">
-          <div class="form-group">
-            <label><strong>Descripción:</strong></label>
-            <p>{{ proyecto.descripcion || 'No disponible' }}</p>
-          </div>
-        </div>
-
-        <!-- Ciudad -->
-        <div class="col-md-4">
-          <div class="form-group">
-            <label><strong>Ciudad:</strong></label>
-            <p>{{ getCiudadNombre(proyecto.ciudad) }}</p>
-          </div>
-        </div>
-
-        <!-- Fecha de inicio -->
-        <div class="col-md-4">
-          <div class="form-group">
-            <label><strong>Fecha de inicio:</strong></label>
-            <p>{{ proyecto.fechaInicio | date: 'longDate' }}</p>
-          </div>
-        </div>
-
-        <!-- Fecha de fin -->
-        <div class="col-md-4">
-          <div class="form-group">
-            <label><strong>Fecha de fin:</strong></label>
-            <p>{{ proyecto.fechaFin | date: 'longDate' }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="text-center mt-4">
-        <button class="btn btn-secondary" (click)="editarProyecto()">
-          <i class="bi bi-pencil-square"></i> Editar
-        </button>
-        <button class="btn btn-success ms-2" (click)="confirmarProyecto()">
-          <i class="bi bi-check-circle"></i> Confirmar
-        </button>
+      <div class="tab-content pt-2">
+        <ng-container
+          *ngComponentOutlet="componentesPorTab[tabActivo]"
+        ></ng-container>
       </div>
     </div>
   </div>
-</div>
+</main>

@@ -1,0 +1,48 @@
+.main {
+  background: linear-gradient(180deg, #fdfdfd 0%, #f8f9fa 100%);
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.proyecto-card {
+  border-radius: 16px;
+  border: none;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #ffffff;
+}
+
+.proyecto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.proyecto-card .card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.proyecto-card .descripcion {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.proyecto-card ul li {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.alert-warning {
+  border-radius: 10px;
+  font-weight: 500;
+  background-color: #fff4e5;
+  color: #d97a1e;
+  border: 1px solid #ffd9a6;
+  padding: 15px;
+}

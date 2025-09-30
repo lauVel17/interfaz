@@ -94,7 +94,7 @@ export interface inicioS {
   msg: string;
   success: any;
   nodocumento: number;
-  nombre: string;
+  nombreapellido: string;
   correo: string;
   token?: string;
   estado: string;

@@ -6,6 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { consultarCiudades } from '../../../../models/identificacionu';
 import { IdentificacionUService } from '../../../../services/identificacionu.service';
 import { CodigoRService } from '../../../../services/codigoR.service';
+import { UpdateUComponent } from '../actualizarUsuarios/update-u.component';
+import { ContrasnaComponent } from '../contrasena/contrasna.component';
+import { UsuarioProyectoComponent } from '../usuario-proyecto/usuario-proyecto.component';
 @Component({
   selector: 'app-rec-usuarios',
   standalone: true,
@@ -20,10 +23,11 @@ export class RecUsuariosComponent implements OnInit {
 
   tabActivo: string = 'profile';
 
-  /* componentesPorTab: { [key: string]: Type<any> } = {
+   componentesPorTab: { [key: string]: Type<any> } = {
     profile: UpdateUComponent,
     contrasena: ContrasnaComponent,
-  }; */
+    proyectos: UsuarioProyectoComponent
+  }; 
 
   constructor(
     private usuarioService: UsuarioService,
@@ -49,8 +53,8 @@ export class RecUsuariosComponent implements OnInit {
       });
   }
 
-  getCiudadName(ciudaId: number): string {
-    const ciudad = this.ciudades.find((ciudad) => ciudad.idciudad === ciudaId);
+  getCiudadName(ciudadid: number): string {
+    const ciudad = this.ciudades.find((ciudad) => ciudad.idciudad === ciudadid);
     return ciudad ? ciudad.nombre : 'No disponible';
   }
   cambiarEstado(usuario: any) {

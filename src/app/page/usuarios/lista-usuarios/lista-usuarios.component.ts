@@ -136,9 +136,8 @@ export class ListaUsuariosComponent implements OnInit {
     const ciudad = this.ciudades.find((ciudad) => ciudad.idciudad === ciudadId);
     return ciudad ? ciudad.nombre : 'No disponible';
   }
-  cambiarEstado(usuario: any, areaIds: number[]) {
- 
-  /*   this.codigoR.cambiarEstadoU(usuario, tienePermiso, 'desdeUsuarios'); */
+  cambiarEstado(usuario: any) {
+    this.codigoR.cambiarEstadoU(usuario, 'desdeUsuario');
   }
   /*   cambiarEstado(usuario: any, areaIds: number[]): void {
     const tienePermiso = this.comprobarPer(areaIds);

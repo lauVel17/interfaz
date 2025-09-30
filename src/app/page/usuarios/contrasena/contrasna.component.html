@@ -1,0 +1,60 @@
+<div class="container" style="padding: 30px; justify-content: center">
+  <div class="card">
+    <div class="card-body">
+      <h6 class="card-title">Actualizar contraseña</h6>
+      <form [formGroup]="contrasenaForm" class="row g-3">
+        <div class="col-md-12">
+          <div class="form-floating">
+            <input
+              type="password"
+              class="form-control"
+              [type]="mostrarContrasena ? 'text' : 'password'"
+              id="floatingNewPassword"
+              formControlName="contrasena"
+              placeholder="Nueva contraseña"
+              [ngClass]="{
+                'is-invalid':
+                  contrasenaForm.get('contrasena')?.invalid &&
+                  contrasenaForm.get('contrasena')?.touched,
+                'is-valid': contrasenaForm.get('contrasena')?.valid
+              }"
+              required
+            />
+            <i
+              class="fa"
+              [ngClass]="mostrarContrasena ? 'fa-eye-slash' : 'fa-eye'"
+              (click)="alternarMostrarContrasena()"
+              style="
+                position: absolute;
+                right: 15px;
+                top: 70%;
+                transform: translateY(-50%);
+                cursor: pointer;
+              "
+              title="Mostrar/Ocultar contraseña"
+            ></i>
+            <label for="floatingNewPassword">Nueva Contraseña</label>
+            <div
+              *ngIf="
+                contrasenaForm.get('contrasena')?.invalid &&
+                contrasenaForm.get('contrasena')?.touched
+              "
+              class="invalid-feedback"
+            >
+              Por favor, ingrese una contraseña
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <button
+            type="button"
+            class="btn btn-info"
+            (click)="actualizarContrasena(nodocumento)"
+          >
+            Actualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

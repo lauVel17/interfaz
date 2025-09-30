@@ -27,6 +27,7 @@ import { SesionService } from './sesion.service';
 import { UsuarioService } from './usuario.service';
 import { AvisosComponent } from '../app/mensajes/avisos/avisos.component';
 import { CreateUComponent } from '../app/page/usuarios/create/create-u.component';
+import { crearProyectoComponent } from '../app/page/proyectos/crear-proyecto/crear-proyecto.component';
 @Injectable({
   providedIn: 'root',
 })
@@ -73,7 +74,7 @@ export class CodigoRService {
     return usuario ? `${usuario.nombre} ${usuario.apellido}` : 'Desconocido';
   }
 
-/*   verificarCambios(originalValues: any, currentValues: any): boolean {
+  /*   verificarCambios(originalValues: any, currentValues: any): boolean {
     if (JSON.stringify(originalValues) === JSON.stringify(currentValues)) {
       this.dialog.open(AvisosComponent, {
         width: '250px',
@@ -85,7 +86,6 @@ export class CodigoRService {
   } */
   /*----------------------------INACTIVAR/ACTIVAR USUARIO------------------------------ */
   cambiarEstadoU(usuario: any, origen: string): void {
-
     const nuevoEstado = usuario.estado === 'Activo' ? 'Inactivo' : 'Activo';
 
     this.usuariosService
@@ -115,5 +115,35 @@ export class CodigoRService {
       disableClose: true,
     });
   }
-}
+  abrirCrearProyecto(): MatDialogRef<any> {
+    return this.dialog.open(crearProyectoComponent, {
+      width: '60vw',
+      maxWidth: 'none',
+      maxHeight: '100vh',
+      disableClose: true,
+    });
+  }
+  verificarCambios(originalValues: any, currentValues: any): boolean {
+    const normalizar = (obj: any) =>
+      Object.fromEntries(
+        Object.entries(obj).map(([k, v]) => [
+          k,
+          typeof v === 'string' ? v.trim() : v,
+        ])
+      );
 
+    const originalNormalizado = normalizar(originalValues);
+    const currentNormalizado = normalizar(currentValues);
+
+    if (
+      JSON.stringify(originalNormalizado) === JSON.stringify(currentNormalizado)
+    ) {
+      this.dialog.open(AvisosComponent, {
+        width: '250px',
+        data: { message: 'No se realizó ningún cambio en el formulario.' },
+      });
+      return false;
+    }
+    return true;
+  }
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment';;
+import { environment } from '../environments/environment';
 import {
   ActualizarContrasena,
   ActualizarEstado,
@@ -10,7 +10,7 @@ import {
   UsuarioEstado,
   usuarios,
   usuariosEliminar,
-  inicioS
+  inicioS,
 } from '../models/usuarios';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -23,7 +23,6 @@ export class UsuarioService {
   private readonly URL_USUARIOSACTIVOS = `${environment.urlServidor}usuario/consultar-usuarios-activos`;
   private usuariosSource = new BehaviorSubject<usuarios[] | null>(null);
   usuarios$ = this.usuariosSource.asObservable();
-
 
   constructor(private readonly http: HttpClient) {}
 
@@ -74,38 +73,34 @@ export class UsuarioService {
 
   // Actualizar usuario
   putUsuarios(
-    idUsuario: number,
+    nodocumento: number,
     usuario: {
-      nombre: string;
-      apellido: string;
+      nombreapellido: string;
       correo: string;
       telefono: string;
-      areaId: number;
-      fechaNacimiento: Date;
+      fechaingreso: Date;
       ciudadId: number;
     }
   ): Observable<actualizarUsuario> {
-    const urlUpdate = `${environment.urlServidor}usuario/actualizar-usuario/${idUsuario}`;
+    const urlUpdate = `${environment.urlServidor}usuario/actualizar-usuario/${nodocumento}`;
     const body = {
-      nombre: usuario.nombre,
-      apellido: usuario.apellido,
+      nombreapellido: usuario.nombreapellido,
       correo: usuario.correo,
       telefono: usuario.telefono,
-      areaId: usuario.areaId,
-      fechaNacimiento: usuario.fechaNacimiento,
-      ciudadId: usuario.ciudadId,
+      fechaingreso: usuario.fechaingreso,
+      ciudadid: usuario.ciudadId,
     };
     return this.http.put<actualizarUsuario>(urlUpdate, body);
   }
 
   // Actualizar contraseña
   putContrasena(
-    idUsuario: number,
+    nodocumento: number,
     usuario: {
       contrasena: string;
     }
   ): Observable<ActualizarContrasena> {
-    const urlUpdate = `${environment.urlServidor}usuario/actualizar-contrasena/${idUsuario}`;
+    const urlUpdate = `${environment.urlServidor}usuario/actualizar-contrasena/${nodocumento}`;
     const body = {
       contrasena: usuario.contrasena,
     };

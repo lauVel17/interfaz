@@ -14,10 +14,8 @@
         <div class="col-md-5">
           <div class="card-body">
             <h5 class="name">
-              <span
-                *ngIf="usuario.nombreapellido; else noDisponible"
-              >
-                {{ usuario.nombreapellido}}
+              <span *ngIf="usuario.nombreapellido; else noDisponible">
+                {{ usuario.nombreapellido }}
               </span>
               <ng-template #noDisponible>No disponible</ng-template>
             </h5>
@@ -30,6 +28,7 @@
                   class="form-check-input"
                   type="checkbox"
                   [checked]="usuario.estado === 'Activo'"
+                  (change)="cambiarEstado(usuario)"
                 />
                 <label class="form-check-label">
                   {{ usuario.estado || "No disponible" }}
@@ -80,10 +79,7 @@
             Resumen
           </button>
         </li>
-        <li
-          class="nav-item flex-fill"
-          role="presentation"
-        >
+        <li class="nav-item flex-fill" role="presentation">
           <button
             class="nav-link w-100"
             [class.active]="tabActivo === 'contrasena'"
@@ -92,13 +88,22 @@
             Actualizar Contraseña
           </button>
         </li>
+        <li class="nav-item flex-fill" role="presentation">
+          <button
+            class="nav-link w-100"
+            [class.active]="tabActivo === 'proyectos'"
+            (click)="tabActivo = 'proyectos'"
+          >
+            Proyectos
+          </button>
+        </li>
       </ul>
 
-     <!--  <div class="tab-content pt-2">
+      <div class="tab-content pt-2">
         <ng-container
           *ngComponentOutlet="componentesPorTab[tabActivo]"
         ></ng-container>
-      </div> -->
+      </div>
     </div>
   </div>
 </main>

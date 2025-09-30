@@ -34,9 +34,9 @@ export interface consultarCiudad {
 }
 export interface consultarCiudades {
   success: any;
-    idciudad?: number;
-    iddepartamento: number;
-    nombre: string;
+  idciudad: number;
+  iddepartamento: number;
+  nombre: string;
 }
 
 

@@ -1,3 +1,136 @@
+.main {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.container {
+  padding: 30px;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 25px;
+  transition: all 0.3s ease;
+
+}
+
+.card {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: #fafafa;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+img {
+  width: 98px;
+  height: 98px;
+ 
+
+}
+
+.card-text {
+  color: #333333;
+}
+
+.user-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.form-check-label {
+  font-size: 1rem;
+}
+
+
+
+.nav-tabs .nav-item .nav-link:hover {
+  background-color: #e7f1ff;
+}
+
+small {
+
+  font-size: 1.2rem;
+}
+
+h5 {
+  font-size: 0.9rem;
+}
+
+.form-check-input {
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 25px;
+  position: relative;
+  transition: background-color 0.3s ease;
+  appearance: none;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #84b6f4;
+}
+
+.form-check-input::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.form-check-input:checked::before {
+  transform: translateX(25px);
+}
+
+.logo-image {
+  width: 80px;
+  height: auto;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  transition: transform 0.3s ease;
+}
+
+.logo-image:hover {
+  transform: scale(1.05);
+}
+
+.name {
+  font-size: 1.5rem;
+
+}
+
+.nav-tabs .nav-link {
+  color: #333;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #e7f1ff;
+  border-radius: 12px;
+  color: #2063f4;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #84b6f4;
+  color: rgb(12, 12, 12);
+  border-radius: 12px;
+}
+
 .btn-success {
   background-color: #ff8243;
   border-color: #ff8243;
@@ -37,10 +170,4 @@
   background-color: #87a8d1;
   border-color: #87a8d1;
 
-}
-
-/* ------------------------------------------ */
-.container {
-  max-width: 100%;
-  max-height: 100%;
 }

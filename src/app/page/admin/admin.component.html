@@ -2,19 +2,16 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
   <div class="d-flex align-items-center justify-content-between">
     <div class="logo d-flex align-items-center">
-      <img src="/public/img/logo.png" alt="" />
     </div>
 
     <i class="bi bi-list toggle-sidebar-btn" (click)="toggleSidebar()"></i>
   </div>
   <script></script>
 
-  <nav class="header-nav ms-auto">
+    <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
-
-
       <li class="nav-item dropdown pe-3">
-        <div>
+        <div *ngIf="usuario">
           <a
             class="nav-link nav-profile d-flex align-items-center pe-0"
             href="#"
@@ -25,7 +22,9 @@
               alt="Profile"
               class="rounded-circle"
             />
-            <span class="d-none d-md-block dropdown-toggle ps-2"></span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{
+              usuario.nombreapellido
+            }}</span>
           </a>
           <!-- End Profile Image Icon -->
 
@@ -33,19 +32,10 @@
             class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
           >
             <li class="dropdown-header">
+              <h6>{{ usuario.nombreapellido }}</h6>
             </li>
             <li>
               <hr class="dropdown-divider" />
-            </li>
-
-            <li>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                routerLink="/principal/miPerfil"
-              >
-                <i class="bi bi-person"></i>
-                <span>Mi perfil</span>
-              </a>
             </li>
 
             <li>
@@ -58,6 +48,7 @@
             <li>
               <a
                 class="dropdown-item d-flex align-items-center"
+                (click)="logOut()"
               >
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Cerrar sesión</span>
@@ -100,14 +91,40 @@
         </li>
         <li>
           <!--   <a href="/principal/createU"> -->
-          <a  (click)="crearUsuario()">
+          <a (click)="crearUsuario()">
             <i class="bi bi-circle"></i><span>Crear usuario</span>
           </a>
         </li>
       </ul>
     </li>
-
-   
+    <li class="nav-item">
+      <a
+        class="nav-link collapsed"
+        data-bs-target="#pr-nav"
+        data-bs-toggle="collapse"
+        href="#"
+      >
+        <i class="bi bi-kanban-fill"></i><span>Proyectos</span
+        ><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul
+        id="pr-nav"
+        class="nav-content collapse"
+        data-bs-parent="#sidebar-nav"
+      >
+        <li>
+          <a routerLink="/admin/proyectos">
+            <i class="bi bi-circle"></i><span>Lista de proyectos</span>
+          </a>
+        </li>
+        <li>
+          <!--   <a href="/principal/createU"> -->
+          <a (click)="crearProyecto()">
+            <i class="bi bi-circle"></i><span>Crear proyecto</span>
+          </a>
+        </li>
+      </ul>
+    </li>
   </ul>
 </aside>
 <!-- End Sidebar-->

@@ -92,9 +92,8 @@ export class SesionService {
   // Cerrar sesión (limpia localStorage)
   logout(): void {
     const token = localStorage.getItem('authToken');
-    const tokenNot = localStorage.getItem('tokenNot');
 
-    if (token && tokenNot) {
+    if (token) {
       this.dialog.closeAll();
       forkJoin([this.usToken.deleteToken(token!)]).subscribe({
         next: () => {

@@ -1,130 +1,67 @@
 <main id="main" class="main">
-  <div class="mb-3">
-    <div class="d-flex justify-content-between align-items-center">
-      <h3 class="card-title">Administrar proyectos</h3>
+  <div class="mb-3 d-flex justify-content-between align-items-center">
+    <h3 class="card-title">Administrar proyectos</h3>
 
-      <div class="d-flex gap-2">
-        <button class="btn btn-success" (click)="crearProyecto()">
-          <i class="bi bi-folder-plus"></i> Crear Proyecto
-        </button>
+    <div class="d-flex gap-2">
+      <button class="btn btn-success" (click)="crearProyecto()">
+        <i class="bi bi-people"></i> Crear Proyecto
+      </button>
+    </div>
+  </div>
 
-        <div class="btn-group">
-          <button
-            type="button"
-            class="btn btn-success dropdown-toggle"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
+  <div class="row g-3">
+    <div *ngIf="proyectos.length === 0" class="col-12">
+      <div class="alert alert-warning text-center">
+        No hay proyectos disponibles.
+      </div>
+    </div>
+
+    <!-- Tarjetas -->
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-3"
+      *ngFor="let proyecto of paginatedProyectos()"
+    >
+      <div class="card h-100 shadow-sm proyecto-card">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title text-truncate" title="{{ proyecto.nombre }}">
+            {{ proyecto.nombre || "No disponible" }}
+          </h5>
+
+          <p
+            class="card-text descripcion mb-2"
+            title="{{ proyecto.descripcion }}"
           >
-            <i class="bi bi-printer"></i> Imprimir
-          </button>
-          <ul class="dropdown-menu">
+            {{ proyecto.descripcion || "No disponible" }}
+          </p>
+
+          <ul class="list-unstyled mb-3 small mt-auto">
             <li>
-              <button class="dropdown-item" (click)="descargarPdf()">
-                <i class="bi bi-file-earmark-pdf"></i> Exportar a PDF
-              </button>
+              <strong>Fecha inicio:</strong>
+              {{ proyecto.fechainicio || "No disponible" }}
             </li>
             <li>
-              <button class="dropdown-item" (click)="descargarExcel()">
-                <i class="bi bi-file-earmark-spreadsheet"></i> Exportar a Excel
-              </button>
+              <strong>Fecha fin:</strong>
+              {{ proyecto.fechafin || "No disponible" }}
             </li>
           </ul>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="card">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover table-sm">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Descripción</th>
-              <th scope="col">Ciudad</th>
-              <th scope="col">Fecha Inicio</th>
-              <th scope="col">Fecha Fin</th>
-              <th scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let proyecto of paginatedProyectos()">
-              <td>{{ proyecto.nombre || 'No disponible' }}</td>
-              <td>{{ proyecto.descripcion || 'No disponible' }}</td>
-              <td>{{ proyecto.ciudad || 'No disponible' }}</td>
-              <td>{{ proyecto.fechaInicio | date: 'shortDate' }}</td>
-              <td>{{ proyecto.fechaFin | date: 'shortDate' }}</td>
-              <td class="text-center">
-                <button
-                  class="btn btn-info btn-sm"
-                  (click)="verDetalle(proyecto.id)"
-                >
-                  <i class="bi bi-eye-fill"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          <div class="d-flex gap-2 align-items-center">
+            <button
+              class="btn btn-info btn-sm flex-fill"
+              (click)="ampliarInfo(proyecto.idproyecto)"
+            >
+              <i class="bi bi-eye-fill"></i> Ver más
+            </button>
 
-        <div *ngIf="proyectos.length === 0" class="alert alert-warning text-center">
-          No hay proyectos disponibles.
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Selector de cantidad por página -->
-  <div *ngIf="proyectos.length > 0" class="pagination-container">
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        <li class="page-item show-items">
-          <div class="ext">
-            <label for="itemsPerPage" class="texto me-2">Mostrar:</label>
+            <button
+              class="btn btn-outline-success btn-sm flex-fill"
+              (click)="postularme(proyecto.idproyecto)"
+            >
+              <i class="bi bi-send-fill"></i> Postularme
+            </button>
           </div>
-          <select
-            id="itemsPerPage"
-            (change)="cambiarItemsPorPagina($event)"
-            class="form-select form-select-sm pagination-select"
-            [value]="itemsPerPageString"
-          >
-            <option *ngFor="let opcion of opcionesPorPagina" [value]="opcion">
-              {{ opcion }}
-            </option>
-            <option value="Todos">Todos</option>
-          </select>
-        </li>
-      </ul>
-    </nav>
-  </div>
-
-  <!-- Paginación -->
-  <div *ngIf="proyectos.length > itemsPerPage">
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        <li class="page-item" [class.disabled]="currentPage === 1">
-          <a class="page-link" (click)="cambiarPagina(currentPage - 1)">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li
-          class="page-item"
-          *ngFor="let page of totalPages()"
-          [class.active]="page === currentPage"
-        >
-          <a class="page-link" (click)="cambiarPagina(page)">
-            {{ page }}
-          </a>
-        </li>
-        <li
-          class="page-item"
-          [class.disabled]="currentPage === totalPages().length"
-        >
-          <a class="page-link" (click)="cambiarPagina(currentPage + 1)">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+        </div>
+      </div>
+    </div>
   </div>
 </main>

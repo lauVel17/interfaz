@@ -5,21 +5,36 @@ import { CommonModule } from '@angular/common';
 import { forkJoin } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { CodigoRService } from '../../../services/codigoR.service';
+import { SesionService } from '../../../services/sesion.service';
+import { inicioS } from '../../../models/usuarios';
 
 @Component({
   selector: 'app-principal',
   standalone: true,
- imports: [CommonModule, RouterModule, RouterLink, RouterModule],
+  imports: [CommonModule, RouterModule, RouterLink, RouterModule],
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-
-  constructor(private router: Router,
+  usuario: inicioS | null = null;
+  usuarioLogueado!: inicioS;
+  constructor(
+    private router: Router,
     private codigoR: CodigoRService,
+    private sesion: SesionService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.sesion.usuario$.subscribe((usuario) => {
+      this.usuario = usuario;
+    });
+    this.codigoR.obtenerUsuarioLogueado().subscribe((data) => {
+      if (data) {
+        this.usuarioLogueado = data.usuario;
+        /* console.log(this.usuarioLogueado); */
+      }
+    });
+  }
 
   toggleSidebar(): void {
     const sidebar = document.querySelector('.sidebar');
@@ -29,7 +44,13 @@ export class AdminComponent implements OnInit {
       body.classList.toggle('toggle-sidebar');
     }
   }
-    crearUsuario() {
+  crearUsuario() {
     this.codigoR.abrirCrearUsuario();
+  }
+  crearProyecto() {
+    this.codigoR.abrirCrearProyecto();
+  }
+  logOut(): void {
+    this.sesion.logout();
   }
 }
