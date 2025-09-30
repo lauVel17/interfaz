@@ -64,8 +64,9 @@ export class ProyectoService {
   }
   getProyectosPorUsuario(nodocumento: number): Observable<ProyectoResponse> {
     const url = `${environment.urlServidor}participaciones/consultar-proyectos-usuarios/${nodocumento}`;
-    return this.http.post<ProyectoResponse>(url, {});
+    return this.http.get<ProyectoResponse>(url);
   }
+
   getUsuariosPorProyecto(idproyecto: number): Observable<any> {
     const url = `${environment.urlServidor}participaciones/consultar-usuarios-proyecto/${idproyecto}`;
     return this.http.get<any>(url);
